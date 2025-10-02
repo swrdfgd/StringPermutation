@@ -6,211 +6,199 @@
   <title>String Permutation Generator</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #ecf0f1;
       margin: 0;
       padding: 0;
-      font-family: 'Trebuchet MS', sans-serif;
-      background: radial-gradient(circle at top, #2c003e, #0d0d0d);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
+      text-align: center;
+    }
+    header {
       padding: 20px;
     }
-
-    .container {
-      background: rgba(30, 30, 30, 0.8);
-      border-radius: 20px;
-      padding: 30px;
-      width: 100%;
-      max-width: 800px;
-      box-shadow: 0px 0px 25px rgba(255, 0, 150, 0.6);
-      text-align: center;
-      backdrop-filter: blur(10px);
-    }
-
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ff0080, #ffbf00, #00ffcc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: bold;
-      letter-spacing: 2px;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
-
     p {
       font-size: 1rem;
-      color: #ddd;
-      margin-bottom: 20px;
+      margin: 0.2rem 0;
     }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #ffbf00;
-    }
-
-    input[type="text"] {
-      padding: 10px 15px;
-      border-radius: 12px;
-      border: 2px solid #ff0080;
-      width: 80%;
-      max-width: 400px;
-      text-align: center;
-      font-size: 1.2rem;
-      outline: none;
-      margin-bottom: 15px;
-      background: #1a1a1a;
-      color: #fff;
-    }
-
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(135deg, #ff0080, #ffbf00);
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0px 0px 12px #ffbf00;
-    }
-
-    #hasiltes {
+    .container {
+      max-width: 800px;
+      margin: auto;
       background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 15px;
-      min-height: 50px;
-      font-size: 1rem;
-      line-height: 1.6;
-      word-wrap: break-word;
-      max-height: 400px;
-      overflow-y: auto;
-      border: 1px solid #333;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-
-    .warning {
-      color: #ff4444;
-      font-size: 0.9rem;
+    input[type="text"] {
+      width: 60%;
+      padding: 8px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
       margin: 10px 0;
     }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      input[type="text"] {
-        width: 100%;
-      }
-      .btn-group {
-        flex-direction: column;
-        gap: 10px;
-      }
+    .btn-group button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn-group button:hover {
+      opacity: 0.85;
+    }
+    button:nth-child(1) { background: #27ae60; color: #fff; }
+    button:nth-child(2) { background: #e67e22; color: #fff; }
+    button:nth-child(3) { background: #2980b9; color: #fff; }
+    button:nth-child(4) { background: #c0392b; color: #fff; }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    #hasiltes {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      text-align: left;
+      max-height: 400px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    #count {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #f1c40f;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <header>
     <h1>String Permutation Generator</h1>
-    <p>🍺 Display every permutation of a given string 🍹</p>
+    <p>Display every unique permutation of a given string.</p>
+    <p style="color:#f39c12">⚠ Default maximum string length: 7 characters</p>
+  </header>
 
-    <label for="number">Input String:</label>
-    <input id="number" type="text" placeholder="Type your string here..." />
-
-    <div>
-      <input type="checkbox" id="unlimited" onchange="toggleWarning()"> 
-      <label for="unlimited" style="display:inline; color:#ffbf00;">Remove length limit</label>
-    </div>
-    <div class="warning" id="warningText">⚠️ Max length is 7 characters by default.</div>
-
+  <div class="container">
+    <label>Input String:</label>
+    <input id="number" type="text" value="" />
+    <label><input type="checkbox" id="nolimit"> Remove length limit (may cause freeze for long strings)</label>
     <div class="btn-group">
       <button onclick="cekinput();">Generate</button>
       <button onclick="resetulang();document.getElementById('number').value='';">Clear</button>
       <button onclick="susun();">Sort</button>
+      <button onclick="cancelGen();">Cancel</button>
     </div>
-
+    <div id="count"></div>
     <div id="hasiltes"></div>
   </div>
 
-  <script>
-    let iput = '';
-    let hasilPermutasi = [];
-    const MAX_LENGTH = 7;
+<script>
+  let iput = '';
+  let hasilPermutasi = [];
+  const MAXLEN = 7;
+  let cancelled = false;
 
-    function perms(a) {
-      let hasil = [];
-      let hasil2 = [];
+  // Async generator with cancellation
+  async function* generatePerms(prefix, str) {
+    if (cancelled) return;
+    if (str.length === 0) {
+      yield prefix;
+    } else {
+      let used = new Set();
+      for (let i = 0; i < str.length; i++) {
+        let next = str[i];
+        if (used.has(next)) continue; // skip duplicate char at this position
+        used.add(next);
 
-      if (a.length > 1) {
-        for (let nDigits = 0; nDigits < a.length; nDigits++) {
-          hasil2 = perms(a.substring(0, nDigits) + a.substring(nDigits + 1, a.length));
-          for (let permssub = 0; permssub < hasil2.length; permssub++) {
-            hasil.push(a[nDigits] + hasil2[permssub]);
-          }
+        let remain = str.slice(0, i) + str.slice(i + 1);
+        yield* generatePerms(prefix + next, remain);
+
+        if (cancelled) return;
+        if (i % 2 === 0) await new Promise(r => setTimeout(r, 0)); // yield to UI
+      }
+    }
+  }
+
+  async function cekinput() {
+    cancelled = false;
+    iput = document.getElementById("number").value;
+    let nolimit = document.getElementById("nolimit").checked;
+
+    if (!nolimit && iput.length > MAXLEN) {
+      document.getElementById("hasiltes").innerHTML =
+        `<span style="color:#ff5555">Maximum string length is ${MAXLEN}. Please shorten your input or remove the limit.</span>`;
+      document.getElementById("count").innerHTML = "";
+      return;
+    }
+
+    document.getElementById("hasiltes").innerHTML = "Generating permutations...";
+    document.getElementById("count").innerHTML = "";
+    hasilPermutasi = [];
+    let seen = new Set();
+
+    let outputDiv = document.getElementById("hasiltes");
+    outputDiv.innerHTML = "";
+    let count = 0;
+
+    for await (let perm of generatePerms("", iput)) {
+      if (cancelled) break;
+      if (!seen.has(perm)) {
+        seen.add(perm);
+        hasilPermutasi.push(perm);
+        count++;
+        if (count % 200 === 0) {
+          outputDiv.innerHTML = hasilPermutasi.join(", ");
+          document.getElementById("count").innerHTML = `Generated: ${count} permutations...`;
         }
       }
-
-      if (a.length == 1) {
-        hasil = a;
-      }
-
-      hasil = [...new Set(hasil)];
-      return hasil;
     }
 
-    function cekinput() {
-      iput = document.getElementById("number").value;
-
-      if (!document.getElementById("unlimited").checked && iput.length > MAX_LENGTH) {
-        document.getElementById("hasiltes").innerHTML = 
-          `<span style="color:#ff4444;">⚠️ Input too long! Max ${MAX_LENGTH} characters allowed.</span>`;
-        return;
-      }
-
-      numdigperms();
+    if (cancelled) {
+      outputDiv.innerHTML = "";
+      document.getElementById("count").innerHTML = "";
+      cancelled = false;
+      return;
     }
 
-    function numdigperms() {
-      hasilPermutasi = perms(iput);
-      document.getElementById("hasiltes").innerHTML = hasilPermutasi.join(", ");
-      document.getElementById("hasiltes").style.color = "#fff";
-    }
+    document.getElementById("count").innerHTML = `Total unique permutations: ${hasilPermutasi.length}`;
+    outputDiv.innerHTML = hasilPermutasi.join(", ");
+  }
 
-    function resetulang() {
-      document.getElementById("hasiltes").innerHTML = "";
-      document.getElementById('number').disabled = false;
-    }
+  function resetulang() {
+    cancelled = false;
+    hasilPermutasi = [];
+    document.getElementById("hasiltes").innerHTML = "";
+    document.getElementById("count").innerHTML = "";
+    document.getElementById('number').disabled = false;
+  }
 
-    function susun() {
+  function susun() {
+    if (hasilPermutasi.length > 0) {
       hasilPermutasi.sort();
       document.getElementById("hasiltes").innerHTML = hasilPermutasi.join(", ");
     }
+  }
 
-    function toggleWarning() {
-      const warn = document.getElementById("warningText");
-      if (document.getElementById("unlimited").checked) {
-        warn.innerHTML = "⚠️ Warning: Removing the limit may cause performance issues or crash your browser!";
-        warn.style.color = "#ffbf00";
-      } else {
-        warn.innerHTML = `⚠️ Max length is ${MAX_LENGTH} characters by default.`;
-        warn.style.color = "#ff4444";
+  function cancelGen() {
+    cancelled = true;
+    document.getElementById("hasiltes").innerHTML = "Cancelling... please wait a moment.";
+    document.getElementById("count").innerHTML = "";
+    setTimeout(() => {
+      if (cancelled) {
+        document.getElementById("hasiltes").innerHTML = "";
+        cancelled = false;
       }
-    }
-  </script>
+    }, 200);
+  }
+</script>
 </body>
 </html>
